@@ -35,3 +35,8 @@ C:\SKOLE\media-draft\hovedforloebsprojekth2-NicklasLMJensen\backend\obj\Debug\ne
 C:\SKOLE\media-draft\hovedforloebsprojekth2-NicklasLMJensen\backend\obj\Debug\net10.0\backend.pdb
 C:\SKOLE\media-draft\hovedforloebsprojekth2-NicklasLMJensen\backend\obj\Debug\net10.0\backend.genruntimeconfig.cache
 C:\SKOLE\media-draft\hovedforloebsprojekth2-NicklasLMJensen\backend\obj\Debug\net10.0\ref\backend.dll
+C:\SKOLE\media-draft\hovedforloebsprojekth2-NicklasLMJensen\backend\bin\Debug\net10.0\Microsoft.EntityFrameworkCore.dll
+C:\SKOLE\media-draft\hovedforloebsprojekth2-NicklasLMJensen\backend\bin\Debug\net10.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\SKOLE\media-draft\hovedforloebsprojekth2-NicklasLMJensen\backend\bin\Debug\net10.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\SKOLE\media-draft\hovedforloebsprojekth2-NicklasLMJensen\backend\bin\Debug\net10.0\Npgsql.dll
+C:\SKOLE\media-draft\hovedforloebsprojekth2-NicklasLMJensen\backend\bin\Debug\net10.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
