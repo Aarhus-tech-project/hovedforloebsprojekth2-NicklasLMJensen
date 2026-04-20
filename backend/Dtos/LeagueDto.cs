@@ -8,6 +8,7 @@ namespace MediaDraftLeague.Backend.Dtos
     {
         [Required(ErrorMessage = "Name is required.")]
         public string Name { get; set; } = string.Empty;
+        
         [Range(1890, 3000, ErrorMessage = "Season year must be between 1890 and 3000.")]
         public int SeasonYear { get; set; }
     }

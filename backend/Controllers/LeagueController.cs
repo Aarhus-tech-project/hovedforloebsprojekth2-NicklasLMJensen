@@ -46,5 +46,40 @@ namespace MediaDraftLeague.Backend.Controllers
 
             return CreatedAtAction(nameof(GetAll), new { id = league.Id }, league);
         }
+
+        [HttpGet("{LeagueId}/participants")]
+        public async Task<ActionResult<IEnumerable<LeagueParticipant>>> GetParticipants(int LeagueId)
+        {
+            var participants = await _db.LeagueParticipants
+                .AsNoTracking()
+                .Where(p => p.LeagueId == LeagueId)
+                .ToListAsync();
+
+            return Ok(participants);
+        }
+
+        [HttpPost("{LeagueId:int}/participants")]
+        public async Task<ActionResult<LeagueParticipant>> AddParticipant(int LeagueId, LeagueParticipantsDto dto)
+        {
+            var leagueExists = await _db.Leagues
+                .AsNoTracking()
+                .AnyAsync(l => l.Id == LeagueId);
+
+            if(!leagueExists)
+            {
+                return NotFound($"League with ID {LeagueId} not found.");
+            }
+
+            var participant = new LeagueParticipant
+            {
+                LeagueId = LeagueId,
+                TeamName= dto.TeamName.Trim()
+            };
+
+            _db.LeagueParticipants.Add(participant);
+            await _db.SaveChangesAsync();
+
+            return Created($"api/League/{LeagueId}/participants/{participant.Id}", participant);
+        }
     }
 }
