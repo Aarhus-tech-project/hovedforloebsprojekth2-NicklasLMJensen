@@ -38,7 +38,7 @@ namespace MediaDraftleague.Backend.Services
 
             if (existingDraft is not null)
             {
-                throw new InvalidOperationException("This league is already in a draft.");
+                throw new KeyNotFoundException("This league is already in a draft.");
             }
 
             var draft = new Draft

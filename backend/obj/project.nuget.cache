@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "o8oldSKTGSs=",
+  "dgSpecHash": "5nS5XJUYhCo=",
   "success": true,
   "projectFilePath": "C:\\SKOLE\\media-draft\\hovedforloebsprojekth2-NicklasLMJensen\\backend\\backend.csproj",
   "expectedPackageFiles": [
@@ -38,15 +38,5 @@
     "C:\\Users\\Bruger\\.nuget\\packages\\system.composition.runtime\\9.0.0\\system.composition.runtime.9.0.0.nupkg.sha512",
     "C:\\Users\\Bruger\\.nuget\\packages\\system.composition.typedparts\\9.0.0\\system.composition.typedparts.9.0.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "message": "Problem reading the cache file C:\\SKOLE\\media-draft\\hovedforloebsprojekth2-NicklasLMJensen\\backend\\obj\\project.nuget.cache : '<' is an invalid start of a property name. Expected a '\"'. Path: $ | LineNumber: 2 | BytePositionInLine: 0.",
-      "projectPath": "C:\\SKOLE\\media-draft\\hovedforloebsprojekth2-NicklasLMJensen\\backend\\backend.csproj",
-      "warningLevel": 1,
-      "filePath": "C:\\SKOLE\\media-draft\\hovedforloebsprojekth2-NicklasLMJensen\\backend\\backend.csproj",
-      "targetGraphs": []
-    }
-  ]
+  "logs": []
 }
