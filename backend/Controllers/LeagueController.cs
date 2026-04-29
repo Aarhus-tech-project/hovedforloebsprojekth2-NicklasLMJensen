@@ -108,5 +108,27 @@ namespace MediaDraftLeague.Backend.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpPost("{LeagueId:int}/draft/pick")]
+        public async Task<ActionResult<DraftPick>> MakePick(int LeagueId, MakeDraftPickDto dto, CancellationToken cancellationToken)
+        {
+            if (!ModelState.IsValid)
+            {
+                return ValidationProblem(ModelState);
+            }
+            try
+            {
+                var pick = await _draftServices.MakePickAsync(LeagueId, dto.LeagueParticipantId, dto.MediaItemId, cancellationToken);
+                return Ok(pick);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }
