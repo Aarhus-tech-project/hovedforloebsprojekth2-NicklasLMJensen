@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using MediaDraftLeague.Backend.Data;
 using MediaDraftLeague.Backend.Domain.Entities;
 using MediaDraftLeague.Backend.Dtos;
 using System.Runtime.Versioning;
+using MediaDraftLeague.Backend.Services;
 
 
 namespace MediaDraftLeague.Backend.Controllers
@@ -16,9 +18,11 @@ namespace MediaDraftLeague.Backend.Controllers
     public class LeagueController : ControllerBase
     {
         private readonly AppDbContext _db;
-        public LeagueController(AppDbContext db)
+        private readonly IDraftServices _draftServices;
+        public LeagueController(AppDbContext db, IDraftServices draftServices)
         {
             _db = db;
+            _draftServices = draftServices;
         }
 
         [HttpGet]
@@ -80,6 +84,51 @@ namespace MediaDraftLeague.Backend.Controllers
             await _db.SaveChangesAsync();
 
             return Created($"api/League/{LeagueId}/participants/{participant.Id}", participant);
+        }
+
+        [HttpPost("{LeagueId:int}/draft/start")]
+        public async Task<ActionResult<Draft>> StartDraft(int LeagueId, StartDraftDto dto, CancellationToken cancellationToken)
+        {
+            if (!ModelState.IsValid)
+            {
+                return ValidationProblem(ModelState);
+            }
+
+            try
+            {
+                var draft = await _draftServices.StartDraftAsync(LeagueId, dto.PicksPerParticipant, cancellationToken);
+                return Ok(draft);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("{LeagueId:int}/draft/pick")]
+        public async Task<ActionResult<DraftPick>> MakePick(int LeagueId, MakeDraftPickDto dto, CancellationToken cancellationToken)
+        {
+            if (!ModelState.IsValid)
+            {
+                return ValidationProblem(ModelState);
+            }
+            try
+            {
+                var pick = await _draftServices.MakePickAsync(LeagueId, dto.LeagueParticipantId, dto.MediaItemId, cancellationToken);
+                return Ok(pick);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }
